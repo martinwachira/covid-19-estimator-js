@@ -78,20 +78,20 @@ const covid19ImpactEstimator = (data) => {
   );
 
   // challenge 3
-  impact.casesForICUByRequestedTime = Math.trunc(
+  impact.casesForICUByRequestedTime = Math.floor(
     impact.infectionsByRequesteTime * 0.05
   );
-  impact.casesForVentilatorsByRequestedTime = Math.trunc(
+  impact.casesForVentilatorsByRequestedTime = Math.floor(
     impact.infectionsByRequestedTime * 0.02
   );
   impact.dollarsInFlight = calcdollarsInFlight(
     impact.infectionsByRequestedTime
   );
 
-  severeImpact.casesForICUByRequestedTime = Math.trunc(
+  severeImpact.casesForICUByRequestedTime = Math.floor(
     severeImpact.infectionsByRequesteTime * 0.05
   );
-  severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
+  severeImpact.casesForVentilatorsByRequestedTime = Math.floor(
     severeImpact.infectionsByRequestedTime * 0.02
   );
   severeImpact.dollarsInFlight = calcdollarsInFlight(
