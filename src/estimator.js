@@ -2,7 +2,6 @@
 const covid19ImpactEstimator = (data) => {
   const {
     periodTypes,
-    // timeToElapse,
     reportedCases
   } = data;
 
@@ -21,6 +20,7 @@ const covid19ImpactEstimator = (data) => {
   const impact = {};
   const severeImpact = {};
 
+  // challenge 1
   impact.currentlyInfected = reportedCases * 10;
   impact.infectionsByRequestedTime = infectionsByRequesteTime(
     impact.currentlyInfected
@@ -30,23 +30,15 @@ const covid19ImpactEstimator = (data) => {
     severeImpact.currentlyInfected
   );
 
-  //   let timeFactor;
+  // challenge 2
+  impact.severeCasesByRequestedTime = Math.trunc(
+    impact.infectionsByRequestedTime * 0.15
+  );
 
-  //   switch (periodTypes) {
-  //     case 'Months':
-  //       timeFactor = Math.trunc(timeToElapse * 30);
-  //       break;
-  //     case 'Weeks':
-  //       timeFactor = Math.trunc(timeToElapse * 7);
-  //       break;
-  //     // case 'Days':
-  //     //   time = Math.trunc((timeToElapse) / 3);
-  //     //   break;
-  //     default:
-  //   }
+  severeImpact.severeCasesByRequestedTime = Math.trunc(
+    severeImpact.infectionsByRequestedTime * 0.15
+  );
 
-  //   impact.infectionsByRequesteTime = impact.currentlyInfected * (2 ** timeFactor);
-  //   severeImpact.infectionsByRequesteTime = severeImpact.currentlyInfected * (2 ** timeFactor);
 
   return {
     data,
