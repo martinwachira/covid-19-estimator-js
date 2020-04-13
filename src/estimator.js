@@ -29,6 +29,8 @@ const covid19ImpactEstimator = (data) => {
     return currentlyInfected * (2 ** timeFactor);
   };
 
+  // updated func name
+
   const calchospitalBedsByRequestedTime = (severeCasesByRequestedTime) => {
     const availableBeds = totalHospitalBeds * 0.35;
     const bedsShort = availableBeds - severeCasesByRequestedTime;
