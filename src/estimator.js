@@ -26,7 +26,7 @@ const covid19ImpactEstimator = (data) => {
   // normalize days; check for weeks and months if used
   if (periodType === 'months') timeToElapse = Math.trunc(timeToElapse * 30);
   if (periodType === 'weeks') timeToElapse = Math.trunc(timeToElapse * 7);
-  if (periodType === 'days') timeToElapse = Math.trunc(timeToElapse * 1);
+  // if (periodType === 'days') timeToElapse = Math.trunc(timeToElapse * 1);
 
   const infectionsByRequesteTime = (currentlyInfected) => {
     const timeFactor = Math.trunc(timeToElapse / 3);
@@ -42,7 +42,9 @@ const covid19ImpactEstimator = (data) => {
 
   // eslint-disable-next-line no-shadow
   const calcdollarsInFlight = (infectionsByRequesteTime) => {
-    const moneyLost = infectionsByRequesteTime * avgDailyIncomePopulation * avgDailyIncomeInUSD;
+    const moneyLost = infectionsByRequesteTime 
+    * avgDailyIncomePopulation 
+    * avgDailyIncomeInUSD;
     const total = moneyLost / timeToElapse;
     return Math.trunc(total);
   };
@@ -80,7 +82,7 @@ const covid19ImpactEstimator = (data) => {
     impact.infectionsByRequesteTime * 0.05
   );
   impact.casesForVentilatorsByRequestedTime = Math.trunc(
-    0.02 * impact.infectionsByRequestedTime
+    impact.infectionsByRequestedTime * 0.02
   );
   impact.dollarsInFlight = calcdollarsInFlight(
     impact.infectionsByRequestedTime
@@ -90,7 +92,7 @@ const covid19ImpactEstimator = (data) => {
     severeImpact.infectionsByRequesteTime * 0.05
   );
   severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
-    0.02 * severeImpact.infectionsByRequestedTime
+    severeImpact.infectionsByRequestedTime * 0.02
   );
   severeImpact.dollarsInFlight = calcdollarsInFlight(
     severeImpact.infectionsByRequestedTime
