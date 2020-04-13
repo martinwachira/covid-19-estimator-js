@@ -23,7 +23,6 @@ const covid19ImpactEstimator = (data) => {
   //     default:
   //   }
 
-  // normalize days; check for weeks and months if used
   if (periodType === 'months') timeToElapse = Math.trunc(timeToElapse * 30);
   if (periodType === 'weeks') timeToElapse = Math.trunc(timeToElapse * 7);
   // if (periodType === 'days') timeToElapse = Math.trunc(timeToElapse * 1);
@@ -41,14 +40,26 @@ const covid19ImpactEstimator = (data) => {
   };
 
   // eslint-disable-next-line no-shadow
-  const calcdollarsInFlight = (infectionsByRequestedTime) => {
-    const moneyLost = infectionsByRequestedTime 
-    * avgDailyIncomePopulation 
-    * avgDailyIncomeInUSD;
-    const tl = Math.trunc(timeToElapse / 3);
-    const total = moneyLost / tl;
-    return Math.trunc(total);
-  };
+  const calcdollarsInFlight = (periodType, avgIncomeperDay, avgDailyIPopulation, timeToElapse) => {
+    let normDays;
+    switch (periodType) {
+      case 'months':
+        normDays = (avgIncomeperDay * avgDailyIPopulation) / (timeToElapse * 30);
+        break;
+      case 'weeks':
+        normDays = (avgIncomeperDay * avgDailyIPopulation) / (timeToElapse * 7);
+        break;
+      case ' days':
+        normDays = (avgIncomeperDay * avgDailyIPopulation) / timeToElapse;
+        break;
+      default:
+        return normDays;
+    }
+  };  
+
+  const getFlight = calcdollarsInFlight(
+    periodType, avgDailyIncomeInUSD, avgDailyIncomePopulation, timeToElapse
+  );
 
   const impact = {};
   const severeImpact = {};
@@ -85,8 +96,8 @@ const covid19ImpactEstimator = (data) => {
   impact.casesForVentilatorsByRequestedTime = Math.trunc(
     impact.infectionsByRequestedTime * 0.02
   );
-  impact.dollarsInFlight = calcdollarsInFlight(
-    impact.infectionsByRequestedTime
+  impact.dollarsInFlight = Math.trunc(
+    impact.infectionsByRequestedTime * getFlight
   );
 
   severeImpact.casesForICUByRequestedTime = Math.trunc(
@@ -95,11 +106,10 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
     severeImpact.infectionsByRequestedTime * 0.02
   );
-  severeImpact.dollarsInFlight = calcdollarsInFlight(
-    severeImpact.infectionsByRequestedTime
+  severeImpact.dollarsInFlight = Math.trunc(
+    severeImpact.infectionsByRequestedTime * getFlight
   );
-
-
+  
   return {
     data,
     impact,
