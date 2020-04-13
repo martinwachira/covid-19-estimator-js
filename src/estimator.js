@@ -3,26 +3,26 @@ const covid19ImpactEstimator = (data) => {
   const {
     region: { avgDailyIncomeInUSD, avgDailyIncomePopulation },
     totalHospitalBeds,
-    periodTypes,
+    periodType,
     reportedCases
   } = data;
 
   let { timeToElapse } = data;
 
-  switch (periodTypes) {
-    case 'months':
-      timeToElapse = Math.trunc(timeToElapse * 30);
-      break;
-    case 'weeks':
-      timeToElapse = Math.trunc(timeToElapse * 7);
-      break;
-    default:
-  }
+  //   switch (periodType) {
+  //     case 'months':
+  //       timeToElapse = Math.trunc(timeToElapse * 30);
+  //       break;
+  //     case 'weeks':
+  //       timeToElapse = Math.trunc(timeToElapse * 7);
+  //       break;
+  //     default:
+  //   }
 
   // normalize days; check for weeks and months if used
-  //  if (periodTypes === 'months') timeToElapse = Math.trunc(timeToElapse * 30);
-  //  if (periodTypes === 'weeks') timeToElapse = Math.trunc(timeToElapse * 7);
-  // if (periodType === 'days') timeToElapse = Math.trunc(timeToElapse * 1);
+  if (periodType === 'months') timeToElapse = Math.trunc(timeToElapse * 30);
+  if (periodType === 'weeks') timeToElapse = Math.trunc(timeToElapse * 7);
+  if (periodType === 'days') timeToElapse = Math.trunc(timeToElapse * 1);
 
   const infectionsByRequesteTime = (currentlyInfected) => {
     const timeFactor = Math.trunc(timeToElapse / 3);
