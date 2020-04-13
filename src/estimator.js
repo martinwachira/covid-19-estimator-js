@@ -28,7 +28,7 @@ const covid19ImpactEstimator = (data) => {
   if (periodType === 'weeks') timeToElapse = Math.trunc(timeToElapse * 7);
   // if (periodType === 'days') timeToElapse = Math.trunc(timeToElapse * 1);
 
-  const infectionsByRequesteTime = (currentlyInfected) => {
+  const infectionsByRequestedTime = (currentlyInfected) => {
     const timeFactor = Math.trunc(timeToElapse / 3);
     return currentlyInfected * (2 ** timeFactor);
   };
@@ -41,8 +41,8 @@ const covid19ImpactEstimator = (data) => {
   };
 
   // eslint-disable-next-line no-shadow
-  const calcdollarsInFlight = (infectionsByRequesteTime) => {
-    const moneyLost = infectionsByRequesteTime 
+  const calcdollarsInFlight = (infectionsByRequestedTime) => {
+    const moneyLost = infectionsByRequestedTime 
     * avgDailyIncomePopulation 
     * avgDailyIncomeInUSD;
     const total = moneyLost / timeToElapse;
@@ -54,11 +54,11 @@ const covid19ImpactEstimator = (data) => {
 
   // challenge 1
   impact.currentlyInfected = reportedCases * 10;
-  impact.infectionsByRequestedTime = infectionsByRequesteTime(
+  impact.infectionsByRequestedTime = infectionsByRequestedTime(
     impact.currentlyInfected
   );
   severeImpact.currentlyInfected = reportedCases * 50;
-  severeImpact.infectionsByRequestedTime = infectionsByRequesteTime(
+  severeImpact.infectionsByRequestedTime = infectionsByRequestedTime(
     severeImpact.currentlyInfected
   );
 
@@ -79,7 +79,7 @@ const covid19ImpactEstimator = (data) => {
 
   // challenge 3
   impact.casesForICUByRequestedTime = Math.floor(
-    impact.infectionsByRequesteTime * 0.05
+    impact.infectionsByRequestedTime * 0.05
   );
   impact.casesForVentilatorsByRequestedTime = Math.floor(
     impact.infectionsByRequestedTime * 0.02
@@ -89,7 +89,7 @@ const covid19ImpactEstimator = (data) => {
   );
 
   severeImpact.casesForICUByRequestedTime = Math.floor(
-    severeImpact.infectionsByRequesteTime * 0.05
+    severeImpact.infectionsByRequestedTime * 0.05
   );
   severeImpact.casesForVentilatorsByRequestedTime = Math.floor(
     severeImpact.infectionsByRequestedTime * 0.02
