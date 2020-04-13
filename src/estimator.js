@@ -37,7 +37,7 @@ const covid19ImpactEstimator = (data) => {
   };
 
   // eslint-disable-next-line no-shadow
-  const dollarsInFlight = (infectionsByRequesteTime) => {
+  const calcdollarsInFlight = (infectionsByRequesteTime) => {
     const moneyLost = infectionsByRequesteTime * avgDailyIncomePopulation * avgDailyIncomeInUSD;
     const total = moneyLost / timeToElapse;
     return Math.trunc(total);
@@ -78,7 +78,7 @@ const covid19ImpactEstimator = (data) => {
   impact.casesForVentilatorsByRequestedTime = Math.trunc(
     impact.casesForVentilatorsByRequestedTime * 0.02
   );
-  impact.dollarsInFlight = dollarsInFlight(
+  impact.dollarsInFlight = calcdollarsInFlight(
     impact.infectionsByRequestedTime
   );
 
@@ -88,7 +88,7 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
     severeImpact.casesForVentilatorsByRequestedTime * 0.02
   );
-  severeImpact.dollarsInFlight = dollarsInFlight(
+  severeImpact.dollarsInFlight = calcdollarsInFlight(
     severeImpact.infectionsByRequestedTime
   );
 
