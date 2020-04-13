@@ -1,7 +1,11 @@
+/* eslint-disable no-trailing-spaces */
 
 const covid19ImpactEstimator = (data) => {
   const {
-    region: { avgDailyIncomeInUSD, avgDailyIncomePopulation },
+    region: { 
+      avgDailyIncomeInUSD, 
+      avgDailyIncomePopulation
+    },
     totalHospitalBeds,
     periodType,
     reportedCases
@@ -28,8 +32,6 @@ const covid19ImpactEstimator = (data) => {
     const timeFactor = Math.trunc(timeToElapse / 3);
     return currentlyInfected * (2 ** timeFactor);
   };
-
-  // updated func names
 
   const calchospitalBedsByRequestedTime = (severeCasesByRequestedTime) => {
     const availableBeds = totalHospitalBeds * 0.35;
@@ -78,7 +80,7 @@ const covid19ImpactEstimator = (data) => {
     impact.infectionsByRequesteTime * 0.05
   );
   impact.casesForVentilatorsByRequestedTime = Math.trunc(
-    impact.infectionsByRequestedTime * 0.02
+    0.02 * impact.infectionsByRequestedTime
   );
   impact.dollarsInFlight = calcdollarsInFlight(
     impact.infectionsByRequestedTime
@@ -88,7 +90,7 @@ const covid19ImpactEstimator = (data) => {
     severeImpact.infectionsByRequesteTime * 0.05
   );
   severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
-    severeImpact.infectionsByRequestedTime * 0.02
+    0.02 * severeImpact.infectionsByRequestedTime
   );
   severeImpact.dollarsInFlight = calcdollarsInFlight(
     severeImpact.infectionsByRequestedTime
