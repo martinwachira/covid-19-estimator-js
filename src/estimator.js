@@ -36,6 +36,7 @@ const covid19ImpactEstimator = (data) => {
     return Math.trunc(totalBeds);
   };
 
+  // eslint-disable-next-line no-shadow
   const dollarsInFlight = (infectionsByRequesteTime) => {
     const moneyLost = infectionsByRequesteTime * avgDailyIncomePopulation * avgDailyIncomeInUSD 
     const total = moneyLost / timeToElapse;
