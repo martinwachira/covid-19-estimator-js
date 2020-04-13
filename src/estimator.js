@@ -28,7 +28,7 @@ const covid19ImpactEstimator = (data) => {
   if (periodType === 'weeks') timeToElapse = Math.trunc(timeToElapse * 7);
   // if (periodType === 'days') timeToElapse = Math.trunc(timeToElapse * 1);
 
-  const infectionsByRequestedTime = (currentlyInfected) => {
+  const calcinfectionsByRequestedTime = (currentlyInfected) => {
     const timeFactor = Math.trunc(timeToElapse / 3);
     return currentlyInfected * (2 ** timeFactor);
   };
@@ -54,11 +54,11 @@ const covid19ImpactEstimator = (data) => {
 
   // challenge 1
   impact.currentlyInfected = reportedCases * 10;
-  impact.infectionsByRequestedTime = infectionsByRequestedTime(
+  impact.infectionsByRequestedTime = calcinfectionsByRequestedTime(
     impact.currentlyInfected
   );
   severeImpact.currentlyInfected = reportedCases * 50;
-  severeImpact.infectionsByRequestedTime = infectionsByRequestedTime(
+  severeImpact.infectionsByRequestedTime = calcinfectionsByRequestedTime(
     severeImpact.currentlyInfected
   );
 
@@ -78,20 +78,20 @@ const covid19ImpactEstimator = (data) => {
   );
 
   // challenge 3
-  impact.casesForICUByRequestedTime = Math.floor(
+  impact.casesForICUByRequestedTime = Math.trunc(
     impact.infectionsByRequestedTime * 0.05
   );
-  impact.casesForVentilatorsByRequestedTime = Math.floor(
+  impact.casesForVentilatorsByRequestedTime = Math.trunc(
     impact.infectionsByRequestedTime * 0.02
   );
   impact.dollarsInFlight = calcdollarsInFlight(
     impact.infectionsByRequestedTime
   );
 
-  severeImpact.casesForICUByRequestedTime = Math.floor(
+  severeImpact.casesForICUByRequestedTime = Math.trunc(
     severeImpact.infectionsByRequestedTime * 0.05
   );
-  severeImpact.casesForVentilatorsByRequestedTime = Math.floor(
+  severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
     severeImpact.infectionsByRequestedTime * 0.02
   );
   severeImpact.dollarsInFlight = calcdollarsInFlight(
