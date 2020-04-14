@@ -1,112 +1,28 @@
-* {
-    box-sizing: border-box;
+
+.navC{
+    color: white;
+    font-family: Arnoldboecklin, fantasy;
+    text-align: center;
     font-family: 'Baloo Paaji 2', cursive;
 }
-
-:root{
-    --white: #ffffff;
-    --hotpink : #f44336;
-}
-
-body {
-    min-height: 100vh;
+.navF{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* background: url('./covid-19.jpg'); */
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: var(--white);
-    position: relative;
-    margin: 0px;
-    font-size: 1.1em;
+    background-color: white;
+    color: black;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family: Arnoldboecklin, fantasy;
+}
+.form{
+    margin: 40px
 }
 
-a{
-    color: var(--white);
+button{
+    width: 320px;
+}
+.foutput{
+    margin: 0px 0px 0px 350px;
 }
 
-h1 {
-    font-size: 3em;
+h4{
     text-align: center;
-}
-
-h1 > span {
-    color: var(--hotpink);
-}
-
-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.overlay{
-    width: 100%;
-    height: 100%;
-    background-color: yellowgreen;
-    opacity: .9;
-    position: absolute;
-}
-
-header, .form-container, .estimated-result, footer {
-    z-index: 2;
-}
-.input-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.input-container > label {
-    font-size: 1.2em;
-    margin: 0px;
-    padding: 0px;
-}
-.input-container > label > input,
- .input-container > label > select {
-    width: 250px;
-    height: 40px;
-    padding: 5px;
-    margin: 10px 10px 10px 0px;
-    border: none;
-}
-
-button {
-    width: 120px;
-    height: 50px;
-    color: var(--white);
-    background-color: var(--hotpink);
-    border: none;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.estimated-result {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    padding: 0px 10px;
-}
-
-#cont_severe_impact, #cont_impact {
-    display: none;
-}
-.impact {
-    margin: 0px 20px 0px 0px;
-}
-
-.impact :first-child {
-    color: var(--hotpink);
-    font-size: 1.4em;
-    font-weight: bold;
-    text-decoration: underline;
-}
-footer{
-    display: flex;
-    font-weight: bold;
-}
-
-footer > p {
-    margin: 50px 10px 10px 10px;
-    
 }
