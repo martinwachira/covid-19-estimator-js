@@ -1,6 +1,8 @@
 
+
 .navC{
     color: white;
+	background-color: black;
     font-family: Arnoldboecklin, fantasy;
     text-align: center;
     font-family: 'Baloo Paaji 2', cursive;
@@ -13,16 +15,28 @@
     font-family: Arnoldboecklin, fantasy;
 }
 .form{
-    margin: 40px
+    margin: 40px;
+	background-color: burlywood;
 }
 
 button{
     width: 320px;
 }
 .foutput{
-    margin: 0px 0px 0px 350px;
+    background-color: orange;
+	margin: 40px 0px 40px 0px;
+	border-radius: 5px;
 }
 
 h4{
     text-align: center;
+}
+
+span{
+	color: green;
+	font-weight: bold;
+}
+
+.cont {
+	background-color: black;
 }

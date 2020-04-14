@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+
 // eslint-disable-next-line import/extensions
 import covid19ImpactEstimator from './estimator.js';
 
