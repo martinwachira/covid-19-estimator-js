@@ -23,11 +23,12 @@ const covid19ImpactEstimator = (data) => {
   //     default:
   //   }
 
+  // normalize days; check for weeks and months if used
   if (periodType === 'months') timeToElapse = Math.trunc(timeToElapse * 30);
   if (periodType === 'weeks') timeToElapse = Math.trunc(timeToElapse * 7);
   // if (periodType === 'days') timeToElapse = Math.trunc(timeToElapse * 1);
 
-  const calcinfectionsByRequestedTime = (currentlyInfected) => {
+  const infectionsByRequestedTime = (currentlyInfected) => {
     const timeFactor = Math.trunc(timeToElapse / 3);
     return currentlyInfected * (2 ** timeFactor);
   };
@@ -40,37 +41,24 @@ const covid19ImpactEstimator = (data) => {
   };
 
   // eslint-disable-next-line no-shadow
-  const calcdollarsInFlight = (periodType, avgIncomeperDay, avgDailyIPopulation, timeToElapse) => {
-    let normDays;
-    switch (periodType) {
-      case 'months':
-        normDays = (avgIncomeperDay * avgDailyIPopulation) / (timeToElapse * 30);
-        break;
-      case 'weeks':
-        normDays = (avgIncomeperDay * avgDailyIPopulation) / (timeToElapse * 7);
-        break;
-      case ' days':
-        normDays = (avgIncomeperDay * avgDailyIPopulation) / timeToElapse;
-        break;
-      default:
-        return normDays;
-    }
-  };  
-
-  const getFlight = calcdollarsInFlight(
-    periodType, avgDailyIncomeInUSD, avgDailyIncomePopulation, timeToElapse
-  );
+  const calcdollarsInFlight = (infectionsByRequestedTime) => {
+    const moneyLost = infectionsByRequestedTime 
+    * avgDailyIncomePopulation 
+    * avgDailyIncomeInUSD;
+    const total = moneyLost / timeToElapse;
+    return Math.trunc(total);
+  };
 
   const impact = {};
   const severeImpact = {};
 
   // challenge 1
   impact.currentlyInfected = reportedCases * 10;
-  impact.infectionsByRequestedTime = calcinfectionsByRequestedTime(
+  impact.infectionsByRequestedTime = infectionsByRequestedTime(
     impact.currentlyInfected
   );
   severeImpact.currentlyInfected = reportedCases * 50;
-  severeImpact.infectionsByRequestedTime = calcinfectionsByRequestedTime(
+  severeImpact.infectionsByRequestedTime = infectionsByRequestedTime(
     severeImpact.currentlyInfected
   );
 
@@ -90,26 +78,27 @@ const covid19ImpactEstimator = (data) => {
   );
 
   // challenge 3
-  impact.casesForICUByRequestedTime = Math.trunc(
+  impact.casesForICUByRequestedTime = Math.floor(
     impact.infectionsByRequestedTime * 0.05
   );
-  impact.casesForVentilatorsByRequestedTime = Math.trunc(
+  impact.casesForVentilatorsByRequestedTime = Math.floor(
     impact.infectionsByRequestedTime * 0.02
   );
-  impact.dollarsInFlight = Math.trunc(
-    impact.infectionsByRequestedTime * getFlight
+  impact.dollarsInFlight = calcdollarsInFlight(
+    impact.infectionsByRequestedTime
   );
 
-  severeImpact.casesForICUByRequestedTime = Math.trunc(
+  severeImpact.casesForICUByRequestedTime = Math.floor(
     severeImpact.infectionsByRequestedTime * 0.05
   );
-  severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
+  severeImpact.casesForVentilatorsByRequestedTime = Math.floor(
     severeImpact.infectionsByRequestedTime * 0.02
   );
-  severeImpact.dollarsInFlight = Math.trunc(
-    severeImpact.infectionsByRequestedTime * getFlight
+  severeImpact.dollarsInFlight = calcdollarsInFlight(
+    severeImpact.infectionsByRequestedTime
   );
-  
+
+
   return {
     data,
     impact,
