@@ -1,0 +1,30 @@
+/* body{
+    padding-top: 20px;
+} */
+.navC{
+    background-color: black;
+    font-family: Arnoldboecklin, fantasy;
+    text-align: center;
+    font-family: 'Baloo Paaji 2', cursive;
+}
+.navF{
+    display: flex;
+    background-color: white;
+    color: black;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family: Arnoldboecklin, fantasy;
+}
+.form{
+    margin: 40px
+}
+
+button{
+    width: 320px;
+}
+.foutput{
+    margin: 0px 0px 0px 350px;
+}
+
+h4{
+    text-align: center;
+}

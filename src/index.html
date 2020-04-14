@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+        <script type="module" src="./myJs.js"></script>
+        <script  type="module" src="./estimator.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light navC">
+        <h3><strong> COVID-19 ESTIMATOR</strong></h3>
+        <svg class="bi bi-bar-chart-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect width="4" height="5" x="1" y="10" rx="1" />
+            <rect width="4" height="9" x="6" y="6" rx="1" />
+            <rect width="4" height="14" x="11" y="1" rx="1" />
+        </svg>
+    </nav>
+    <br>
+    <!-- <div class="card"> -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-header"><h5>Estimator</h5></div>
+            <div class="container">
+                <form class="form" id="form">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="population">Population</label>
+                            <input type="number" class="form-control" data-population id="data-population"
+                                placeholder="population">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="timeToElapse">Time to Elapse</label>
+                            <input type="number" class="form-control" timeToElapse id="timeToElapse"
+                                placeholder="Time to Elapse">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="reportedCases">Reported Cases</label>
+                            <input type="number" class="form-control" data-reported-cases id="data-reported-cases"
+                                placeholder="reported cases">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="totalHospitalBeds">Hospital Beds</label>
+                            <input type="number" class="form-control" data-total-hospital-beds
+                                id="data-total-hospital-beds" placeholder="beds">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="periodType">Period Type</label>
+                            <select name="periodType" data-period-type id="data-period-type" class="form-control">
+                                <option value="days">Days</option>
+                                <option value="weeks">Weeks</option>
+                                <option value="months">Months</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" data-go-estimate class="btn btn-success" id="estimate">Estimate</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+
+    <div class="card-header"><h5>Output</h5></div>
+    <div class="row foutput">
+        <div class="col-md-4">
+            <div class="estimated-result" id="estimated_result">
+                <div class="impact" id="cont_impact">
+                    <h4><u>Impact</u></h4><br>
+                    <input type="text" class="form-control est-impact" placeholder="Currently Infected"><br>
+                    <input type="text" class="form-control est-impact" placeholder="Infection By Requested Time"><br>
+                    <input type="text" class="form-control est-impact" placeholder="Severe Cases By Requested Time"><br>
+                    <input type="text" class="form-control est-impact" placeholder="Hospital Beds By Requested Time"><br>
+                    <input type="text" class="form-control est-impact" placeholder="Cases For ICU By Requested Time"><br>
+                    <input type="text" class="form-control est-impact" placeholder="Cases For Ventilators By Requested Time"><br>
+                    <input type="text" class="form-control est-impact" placeholder="Dollars In Flight"><br>
+                </div>
+            </div>
+        </div>
+            <div class="col-md-4">
+                <div class="impact servere-impact" id="cont_severe_impact">
+                    <h4><u>Severe Impact</u></h4><br>
+                    <input type="text" class="form-control est-severe-impact" placeholder="Currently Infected"><br>
+                    <input type="text" class="form-control est-severe-impact" placeholder="Infection By Requested Time"><br>
+                    <input type="text" class="form-control est-severe-impact" placeholder="Severe Cases By Requested Time"><br>
+                    <input type="text" class="form-control est-severe-impact" placeholder="Hospital Beds By Requested Time"><br>
+                    <input type="text" class="form-control est-severe-impact" placeholder="Cases For ICU By Requested Time"><br>
+                    <input type="text" class="form-control est-severe-impact" placeholder="Cases For Ventilators By Requested Time"><br>
+                    <input type="text" class="form-control est-severe-impact" placeholder="Dollars In Flight"><br>
+                </div>
+            </div>
+    </div>
+
+    <br>
+    <div class="card">
+        <div class="footer fixed-bottom" style="margin-bottom:10px">
+            <strong>
+                <footer class="blockquote-footer text-center" style="color:green">All Rights Reserved &copy;2020
+                    covid-19 estimator
+                    Powered by Martin Wachira</footer>
+            </strong>
+        </div>
+    </div>
+</body>
+</html>
