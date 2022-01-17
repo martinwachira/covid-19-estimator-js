@@ -1,10 +1,10 @@
-// currently Infected function
+// currently Infected func
 const estimateCurrentlyInfected = (impact, data) => {
   const currentlyInfected = Math.trunc(data.reportedCases * impact);
   return currentlyInfected;
 };
 
-// infections By Requested Time function
+// infections By Requested Time func
 const infectionByRequestTime = (data, currentlyInfected) => {
   let time = '';
   let infectionBRT = '';
@@ -73,20 +73,20 @@ const estimateDollarsInFlight = (data, currentlyInfected) => {
 };
 
 const estimateImpact = (data, impact) => {
-  // Challenge 1
+  // --Challenge 1 
   const currentlyInfectedR = Math.trunc(estimateCurrentlyInfected(impact, data));
   const infectionByRT = Math.trunc(infectionByRequestTime(data, currentlyInfectedR));
 
-  // Challenge 2
+  // --Challenge 2
   const severeCasesByRequestedTime = estSevereCasesBRT(infectionByRT);
   const hospitalBedsByRequestedTime = estHospitalBRT(data, severeCasesByRequestedTime);
 
-  // Challenge 3
+  // --Challenge 3
   const casesForICUByRequestedTime = estimateCasesForICUByRequestedTime(data, currentlyInfectedR);
   const casesForVentilatorsByRequestedTime = casesVentilatorsBRT(data, currentlyInfectedR);
   const dollarsInFlightForImpact = estimateDollarsInFlight(data, currentlyInfectedR);
 
-  // Impact object
+  // --Impact object
   const impactObj = {
     currentlyInfected: currentlyInfectedR,
     infectionsByRequestedTime: infectionByRT,
